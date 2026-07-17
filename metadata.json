@@ -1,0 +1,6 @@
+{
+  "name": "Weather Assistant",
+  "description": "An intelligent weather assistant providing current conditions, a 7-day forecast, interactive weather trend charts, and actionable planning recommendations powered by Gemini.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
