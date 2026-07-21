@@ -184,9 +184,18 @@ export default function App() {
         body: JSON.stringify({ city: targetCity })
       });
 
-      const result = await res.json();
+      let result: any = null;
+      const contentType = res.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        result = await res.json();
+      } else {
+        const text = await res.text();
+        const snippet = text.slice(0, 150);
+        throw new Error(`Server returned non-JSON response (status ${res.status}): ${snippet || "Empty response body"}. This usually means the API router or function is not deployed correctly.`);
+      }
+
       if (!res.ok) {
-        throw new Error(result.error || "An unknown error occurred.");
+        throw new Error(result?.error || `Server returned error status ${res.status}`);
       }
 
       setData(result);
